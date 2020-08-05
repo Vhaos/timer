@@ -7,11 +7,11 @@ import (
 	"github.com/spf13/cobra"
 )
 
-
+// rootCmd represents the root command <timer> before subcommands are invoked
 var (
 	rootCmd = &cobra.Command{
 		Version: "0.1.0",
-		Use:   "timer",
+		Use:   "timer <command> <value>",
 		Short: "A simple CLI command for setting timers",
 		Long: `Timer ⏰ is a simple CLI tool, written in Go, for quickly creating simple timers 
 that display a tiny native notification when they expire. Timer is built with 
