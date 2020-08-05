@@ -54,7 +54,7 @@ func parseArgs(cmd *cobra.Command, args []string) error {
 func setTimer(cmd *cobra.Command, args []string) {
 	title := "⏰ Timer CLI - Countdown Started"
 	body := fmt.Sprintf("A timer has been started for %s", timer)
-	icon := "assets/information.png"
+	icon := "assets/icon.png"
 	beeep.Notify(title, body, icon)
 	
 	// start timer in a waitgroup in case multiple timers started simultaneously 
