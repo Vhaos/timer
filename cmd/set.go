@@ -1,7 +1,7 @@
 package cmd
 
 import (
-	"log"
+	"sync"
 	"errors"
 	"strings"
 	"time"
@@ -44,13 +44,26 @@ func parseArgs(cmd *cobra.Command, args []string) error {
 }
 
 func setTimer(cmd *cobra.Command, args []string) {
-	title := "⏰ Timer CLI"
+	title := "⏰ Timer CLI - Countdown Started"
 	body := fmt.Sprintf("A timer has been started for %s", timer)
 	icon := "assets/information.png"
+	beeep.Notify(title, body, icon)
 	
-	err := beeep.Notify(title, body, icon)
-	if err != nil {
-		log.Fatal("error trying to create notification")
-		panic(err)
-	}
+	var wg sync.WaitGroup
+	wg.Add(1)
+
+	go func() {
+		defer wg.Done()
+
+		// start a countdown
+		done := time.Until(time.Now().Add(timer))
+		<-time.After(done)
+
+		// update title and body
+		title = "⏰ Timer CLI - Countdown finished"
+		body = fmt.Sprintf("Your timer of %v is over.", args[0])
+		beeep.Notify(title, body, icon)
+	}()
+
+	wg.Wait()
 }
