@@ -40,7 +40,7 @@ go get -u github.com/vhaos/timer
 timer set 10s &
 
 # Start a timer for 3 minutes and 31 seconds.
-timer set 3m21s
+timer set 3m31s
 
 # Start a timer for 1 hour and 1 minute.
 timer set 1h1m
